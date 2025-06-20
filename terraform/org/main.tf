@@ -74,3 +74,29 @@ resource "google_project_iam_member" "add_new_role" {
       ]
     }
 }
+
+# Variable for the target project ID from IAM_BINDINGS
+variable "target_project_id" {
+  description = "The ID of the project where IAM changes should be applied."
+  type        = string
+  default     = "overwatch-e2e-test-1"
+}
+
+# Remove IAM bindings as per IAM_BINDINGS
+resource "google_project_iam_member_remove" "remove_viewer_asdfgh" {
+  project = var.target_project_id
+  role    = "roles/viewer"
+  member  = "serviceAccount:asdfgh@overwatch-e2e-test-1.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_member_remove" "remove_overwatch_p4sa_role_service_account" {
+  project = var.target_project_id
+  role    = "organizations/9454078371/roles/OverwatchP4saRole"
+  member  = "serviceAccount:service-307054442069@gcp-sa-staging-slz.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_member_remove" "remove_service_usage_consumer_asdfgh" {
+  project = var.target_project_id
+  role    = "roles/serviceusage.serviceUsageConsumer"
+  member  = "serviceAccount:asdfgh@overwatch-e2e-test-1.iam.gserviceaccount.com"
+}
