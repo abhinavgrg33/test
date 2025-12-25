@@ -74,3 +74,28 @@ resource "google_project_iam_member" "add_new_role" {
       ]
     }
 }
+
+# Remove IAM bindings for iap-ssh-test-414312 as per requirements
+resource "google_project_iam_member_remove" "remove_viewer_balajitest_user" {
+  project = "iap-ssh-test-414312"
+  role    = "roles/viewer"
+  member  = "user:balajitest@gcpsecurityblrtest.joonix.net"
+}
+
+resource "google_project_iam_member_remove" "remove_oslogin_balajitest_user" {
+  project = "iap-ssh-test-414312"
+  role    = "roles/compute.osLogin"
+  member  = "user:balajitest@gcpsecurityblrtest.joonix.net"
+}
+
+resource "google_project_iam_member_remove" "remove_iap_tunnel_balajitest_user" {
+  project = "iap-ssh-test-414312"
+  role    = "roles/iap.tunnelResourceAccessor"
+  member  = "user:balajitest@gcpsecurityblrtest.joonix.net"
+}
+
+resource "google_project_iam_member_remove" "remove_editor_7694950747_sa" {
+  project = "iap-ssh-test-414312"
+  role    = "roles/editor"
+  member  = "serviceAccount:7694950747-compute@developer.gserviceaccount.com"
+}
