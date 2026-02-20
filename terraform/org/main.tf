@@ -74,3 +74,10 @@ resource "google_project_iam_member" "add_new_role" {
       ]
     }
 }
+
+# Remove the specified IAM binding for the given resource name
+resource "google_project_iam_member_remove" "remove_cloudasset_owner_from_secured_landing_zone_sa" {
+  project = "terraform-294454"
+  role    = "roles/cloudasset.owner"
+  member  = "serviceAccount:secured-landing-zone-guitar@system.gserviceaccount.com"
+}
