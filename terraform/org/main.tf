@@ -74,3 +74,10 @@ resource "google_project_iam_member" "add_new_role" {
       ]
     }
 }
+
+# Remove the 'roles/cloudasset.owner' role for the specified service account
+resource "google_project_iam_member_remove" "remove_cloudasset_owner_for_secured_landing_zone_sa" {
+  project = data.google_project.current.project_id
+  role    = "roles/cloudasset.owner"
+  member  = "serviceAccount:secured-landing-zone-guitar@system.gserviceaccount.com"
+}
